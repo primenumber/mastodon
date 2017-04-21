@@ -65,7 +65,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onDelete (status) {
-    dispatch(deleteStatus(status.get('id')));
+    dispatch(openModal('CONFIRM', {
+      message: 'Are you sure you want to delete this?',
+      confirm: 'Delete',
+      onConfirm: () => dispatch(deleteStatus(status.get('id')))
+    }));
   },
 
   onMention (account, router) {
