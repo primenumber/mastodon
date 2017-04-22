@@ -1,6 +1,6 @@
 import emojione from 'emojione';
 
-const toImage = str => shortnameToImage(unicodeToImage(str));
+const toImage = str => poyoToImage(shortnameToImage(unicodeToImage(str)));
 
 const unicodeToImage = str => {
   const mappedUnicode = emojione.mapUnicodeToShort();
@@ -28,6 +28,10 @@ const shortnameToImage = str => str.replace(emojione.regShortNames, shortname =>
   const alt     = emojione.convert(unicode.toUpperCase());
 
   return `<img draggable="false" class="emojione" alt="${alt}" src="/emoji/${unicode}.svg" />`;
+});
+
+const poyoToImage = str => str.replace(/:poyo:/g, (poyo) => {
+  return `<i class="fa-poyo"></i>`;
 });
 
 export default function emojify(text) {

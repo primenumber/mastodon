@@ -1,0 +1,16 @@
+$icon-size--poyo: 24px;
+
+@mixin icon--poyo($size: $icon-size--poyo) {
+  display: block;
+  width: $size;
+  height: $size;
+  background: image-url('icon_poyo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.fa-poyo {
+  @include icon--poyo(24px);
+  display: inline-block;
+}
