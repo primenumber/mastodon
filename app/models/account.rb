@@ -43,10 +43,12 @@
 #  protocol                :integer          default("ostatus"), not null
 #  memorial                :boolean          default(FALSE), not null
 #  moved_to_account_id     :integer
+#  featured_collection_url :string
 #
 
 class Account < ApplicationRecord
-  MENTION_RE = /(?<=^|[^\/[:word:]])@(([a-z0-9_]+)(?:@[a-z0-9\.\-]+[a-z0-9]+)?)/i
+  USERNAME_RE = /[a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+)?/i
+  MENTION_RE  = /(?<=^|[^\/[:word:]])@((#{USERNAME_RE})(?:@[a-z0-9\.\-]+[a-z0-9]+)?)/i
 
   include AccountAvatar
   include AccountFinderConcern
@@ -67,7 +69,8 @@ class Account < ApplicationRecord
   validates :username, uniqueness: { scope: :domain, case_sensitive: true }, if: -> { !local? && will_save_change_to_username? }
 
   # Local user validations
-  validates :username, format: { with: /\A[a-z0-9_]+\z/i }, uniqueness: { scope: :domain, case_sensitive: false }, length: { maximum: 30 }, if: -> { local? && will_save_change_to_username? }
+  validates :username, format: { with: /\A[a-z0-9_]+\z/i }, length: { maximum: 30 }, if: -> { local? && will_save_change_to_username? }
+  validates_with UniqueUsernameValidator, if: -> { local? && will_save_change_to_username? }
   validates_with UnreservedUsernameValidator, if: -> { local? && will_save_change_to_username? }
   validates :display_name, length: { maximum: 30 }, if: -> { local? && will_save_change_to_display_name? }
   validates :note, length: { maximum: 160 }, if: -> { local? && will_save_change_to_note? }
@@ -102,7 +105,7 @@ class Account < ApplicationRecord
   has_many :lists, through: :list_accounts
 
   # Account migrations
-  belongs_to :moved_to_account, class_name: 'Account'
+  belongs_to :moved_to_account, class_name: 'Account', optional: true
 
   scope :remote, -> { where.not(domain: nil) }
   scope :local, -> { where(domain: nil) }
@@ -163,7 +166,7 @@ class Account < ApplicationRecord
 
   def refresh!
     return if local?
-    ResolveRemoteAccountService.new.call(acct)
+    ResolveAccountService.new.call(acct)
   end
 
   def unsuspend!
