@@ -4,20 +4,9 @@ class StatusesIndex < Chewy::Index
   include DatetimeClampingConcern
 
   settings index: index_preset(refresh_interval: '30s', number_of_shards: 5), analysis: {
-    filter: {
-      english_stop: {
-        type: 'stop',
-        stopwords: '_english_',
-      },
-
-      english_stemmer: {
-        type: 'stemmer',
-        language: 'english',
-      },
-
-      english_possessive_stemmer: {
-        type: 'stemmer',
-        language: 'possessive_english',
+    tokenizer: {
+      kuromoji_user_dict: {
+        type: 'kuromoji_tokenizer',
       },
     },
 
@@ -28,15 +17,13 @@ class StatusesIndex < Chewy::Index
       },
 
       content: {
-        tokenizer: 'standard',
+        type: 'custom',
+        tokenizer: 'kuromoji_user_dict',
         filter: %w(
+          kuromoji_baseform
+          kuromoji_stemmer
           lowercase
-          asciifolding
           cjk_width
-          elision
-          english_possessive_stemmer
-          english_stop
-          english_stemmer
         ),
       },
 
