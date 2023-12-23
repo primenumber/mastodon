@@ -37,6 +37,8 @@ class UserSettings
     setting :display_media, default: 'default', in: %w(default show_all hide_all)
     setting :auto_play, default: false
     setting :emoji_style, default: 'auto', in: %w(auto native twemoji)
+    # poyo-server custom
+    setting :bigger_publish, default: false
   end
 
   namespace :notification_emails do
