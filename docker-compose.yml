@@ -29,23 +29,27 @@ services:
     build: es-kuromoji
     restart: always
     environment:
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true"
-      - "xpack.license.self_generated.type=basic"
-      - "xpack.security.enabled=false"
-      - "xpack.watcher.enabled=false"
-      - "xpack.graph.enabled=false"
-      - "xpack.ml.enabled=false"
-      - "bootstrap.memory_lock=true"
-      - "cluster.name=es-mastodon"
-      - "discovery.type=single-node"
-      - "thread_pool.write.queue_size=1000"
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true'
+      - 'xpack.license.self_generated.type=basic'
+      - 'xpack.security.enabled=false'
+      - 'xpack.watcher.enabled=false'
+      - 'xpack.graph.enabled=false'
+      - 'xpack.ml.enabled=false'
+      - 'bootstrap.memory_lock=true'
+      - 'cluster.name=es-mastodon'
+      - 'discovery.type=single-node'
+      - 'thread_pool.write.queue_size=1000'
     networks:
-       - external_network
-       - internal_network
+      - external_network
+      - internal_network
     healthcheck:
-       test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      test:
+        [
+          'CMD-SHELL',
+          'curl --silent --fail localhost:9200/_cluster/health || exit 1',
+        ]
     volumes:
-       - ./elasticsearch:/usr/share/elasticsearch/data
+      - ./elasticsearch:/usr/share/elasticsearch/data
     ulimits:
       memlock:
         soft: -1
