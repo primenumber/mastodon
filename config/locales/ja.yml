@@ -1167,6 +1167,7 @@ ja:
     remove: エイリアスを削除
   appearance:
     advanced_settings: 詳細設定
+    optional_feature: このサーバー独自の追加機能
     animations_and_accessibility: アニメーションとアクセシビリティー
     boosting_preferences: ブースト設定
     boosting_preferences_info_html: "<strong>Tip:</strong> 設定に関係なく、<kbd>Shift</kbd> を押しながら %{icon} Boostアイコンを<kbd>クリック</kbd>すると、すぐにブーストされます。"
