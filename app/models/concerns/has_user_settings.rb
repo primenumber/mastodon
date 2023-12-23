@@ -134,4 +134,9 @@ module HasUserSettings
   def hide_all_media?
     settings['web.display_media'] == 'hide_all'
   end
+
+  # poyo-server custom
+  def setting_bigger_publish
+    settings['web.bigger_publish']
+  end
 end
