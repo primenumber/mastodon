@@ -38,7 +38,7 @@
     %h4= t 'appearance.optional_feature'
 
     .fields-group
-      = f.input :setting_bigger_publish, as: :boolean, wrapper: :with_label, hint: true
+      = ff.input :'web.bigger_publish', wrapper: :with_label, hint: I18n.t('simple_form.hints.defaults.setting_bigger_publish'), label: I18n.t('simple_form.labels.defaults.setting_bigger_publish')
 
     %h4= t 'appearance.advanced_web_interface'
 
