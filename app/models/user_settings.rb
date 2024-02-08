@@ -42,6 +42,7 @@ class UserSettings
     setting :contrast, default: 'auto', in: %w(auto high)
     # poyo-server custom
     setting :bigger_publish, default: false
+    setting :bigger_emoji, default: false
   end
 
   namespace :notification_emails do

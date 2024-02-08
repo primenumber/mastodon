@@ -31,6 +31,7 @@ defaults: &defaults
   show_domain_blocks_rationale: 'disabled'
   require_invite_text: false
   bigger_publish: false
+  bigger_emoji: false
   backups_retention_period: 7
   captcha_enabled: false
   allow_referrer_origin: false
