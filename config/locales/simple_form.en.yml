@@ -70,6 +70,7 @@ en:
         setting_use_blurhash: Gradients are based on the colors of the hidden visuals but obfuscate any details
         setting_use_pending_items: Hide timeline updates behind a click instead of automatically scrolling the feed
         setting_bigger_publish: Make button larger and easier to press
+        setting_bigger_emoji: Make emoji larger
         username: You can use letters, numbers, and underscores
         whole_word: When the keyword or phrase is alphanumeric only, it will only be applied if it matches the whole word
       domain_allow:

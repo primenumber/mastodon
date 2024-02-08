@@ -39,6 +39,7 @@ class UserSettings
     setting :emoji_style, default: 'auto', in: %w(auto native twemoji)
     # poyo-server custom
     setting :bigger_publish, default: false
+    setting :bigger_emoji, default: false
   end
 
   namespace :notification_emails do
