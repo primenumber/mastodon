@@ -139,4 +139,8 @@ module HasUserSettings
   def setting_bigger_publish
     settings['web.bigger_publish']
   end
+
+  def setting_bigger_emoji
+    settings['web.bigger_emoji']
+  end
 end
