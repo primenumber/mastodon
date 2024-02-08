@@ -150,6 +150,7 @@ module ApplicationHelper
     output << 'custom-scrollbars' unless current_account&.user&.setting_system_scrollbars_ui
     output << (current_account&.user&.setting_reduce_motion ? 'reduce-motion' : 'no-reduce-motion')
     output << 'bigger-publish' if current_account&.user&.setting_bigger_publish
+    output << 'bigger-emoji' if current_account&.user&.setting_bigger_emoji
     output << 'rtl' if locale_direction == 'rtl'
     output.compact_blank.join(' ')
   end
