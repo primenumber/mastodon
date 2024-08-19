@@ -1,0 +1,8 @@
+.bigger-emoji {
+  .detailed-status .status__content p .emojione,
+  p .emojione,
+  .notification__message .emojione {
+    width: auto !important;
+    height: 2em !important;
+  }
+}
