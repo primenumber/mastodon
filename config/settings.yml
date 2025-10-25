@@ -53,7 +53,7 @@ defaults: &defaults
   bigger_emoji: false
   backups_retention_period: 7
   captcha_enabled: false
-  allow_referer_origin: false
+  allow_referrer_origin: false
 
 development:
   <<: *defaults
