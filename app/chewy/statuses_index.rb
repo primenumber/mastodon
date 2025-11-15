@@ -4,6 +4,21 @@ class StatusesIndex < Chewy::Index
   include DatetimeClampingConcern
 
   settings index: index_preset(refresh_interval: '30s', number_of_shards: 5), analysis: {
+    filter: {
+      english_stop: {
+        type: 'stop',
+        stopwords: '_english_',
+      },
+      english_stemmer: {
+        type: 'stemmer',
+        language: 'english',
+      },
+      english_possessive_stemmer: {
+        type: 'stemmer',
+        language: 'possessive_english',
+      },
+    },
+
     tokenizer: {
       kuromoji_user_dict: {
         type: 'kuromoji_tokenizer',
@@ -19,11 +34,22 @@ class StatusesIndex < Chewy::Index
       content: {
         type: 'custom',
         tokenizer: 'kuromoji_user_dict',
+        char_filter: %w(
+          icu_normalizer
+          html_strip
+          kuromoji_iteration_mark
+        ),
         filter: %w(
-          kuromoji_baseform
-          kuromoji_stemmer
+          english_possessive_stemmer
           lowercase
+          asciifolding
+          kuromoji_stemmer
+          kuromoji_number
+          kuromoji_baseform
+          icu_normalizer
           cjk_width
+          english_stop
+          english_stemmer
         ),
       },
 
